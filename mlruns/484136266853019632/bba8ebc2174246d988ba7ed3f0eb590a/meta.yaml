@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Acer/Documents/Greatfit/Machine%20Learning/Ml-ops/mlruns/484136266853019632/bba8ebc2174246d988ba7ed3f0eb590a/artifacts
+end_time: 1689670226776
+entry_point_name: ''
+experiment_id: '484136266853019632'
+lifecycle_stage: active
+run_id: bba8ebc2174246d988ba7ed3f0eb590a
+run_name: Regression in Unbalanced data 2023-07-18 14:35:26
+run_uuid: bba8ebc2174246d988ba7ed3f0eb590a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1689670226690
+status: 3
+tags: []
+user_id: Uzwal

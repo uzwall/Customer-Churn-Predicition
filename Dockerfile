@@ -1,15 +1,15 @@
-From python:3.9-slim-buster
+FROM python:3.9-slim-buster
 
-# set working directory to /app
-WORKDIR /app                                
+# Set working directory to /app
+WORKDIR /app
 
-#source path to destination path ie. current directory to /app
-COPY . .     
+# Copy source code to the container's working directory
+COPY . .
 
-#install dependencies
-RUN pip install -r requirement.txt         
+# Install dependencies
+RUN pip install -r requirements.txt
 RUN python 3.Mlflow_Autolog.py
 
-# cmd to launch app when container is run
-CMD ["mlflow", "ui"]
-
+# Command to run mlflow ui and python script
+# CMD ["mlflow","ui"]
+entrypoint mlflow ui --host='0.0.0.0' --port='5000'
