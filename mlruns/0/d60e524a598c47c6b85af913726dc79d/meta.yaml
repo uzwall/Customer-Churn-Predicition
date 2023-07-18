@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Acer/Documents/Greatfit/Machine%20Learning/Ml-ops/mlruns/0/d60e524a598c47c6b85af913726dc79d/artifacts
+end_time: 1689654998030
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: d60e524a598c47c6b85af913726dc79d
+run_name: bright-fox-902
+run_uuid: d60e524a598c47c6b85af913726dc79d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1689654994629
+status: 3
+tags: []
+user_id: Uzwal
