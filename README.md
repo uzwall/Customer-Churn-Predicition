@@ -1,4 +1,4 @@
-# Customer-Churn-Predicition
+# General Overview
 Project made with model tracking using mlflow(Machine Learing) and Docker implementation
 
 # Customer Churn Prediction using MLflow
