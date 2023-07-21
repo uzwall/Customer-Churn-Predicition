@@ -36,9 +36,8 @@ output = gr.outputs.Label()  # Assuming the output is a label showing the churn 
 # Create the Gradio Interface
 interface = gr.Interface(fn=predict_churn, inputs=inputs, outputs=output)
 
-# Create a Gradio app with the interface
-app = gr.apps(interface)
+
 
 # If this script is run as the main module, start the Gradio app
 if __name__ == "__main__":
-    app.launch(share=True)
+    interface.launch(share=True)
