@@ -1,31 +1,44 @@
-import numpy as np
 import gradio as gr
+import joblib
 
+# Modify the model path to use forward slashes
+model_path = '../model/prediction2.joblib'
 
-def flip_text(x):
-    return x[::-1]
+# Load the model
+model = joblib.load(model_path)
 
+# Function that takes the input_data and returns the result
+def predict_churn(AccountWeeks, ContractRenewal, DataPlan, DataUsage, CustServCalls,
+                  DayMins, DayCalls, MonthlyCharge, OverageFee, RoamMins):
+    # Assuming you have a function or model that predicts churn
+    input_data = [[AccountWeeks, ContractRenewal, DataPlan, DataUsage, CustServCalls,
+                   DayMins, DayCalls, MonthlyCharge, OverageFee, RoamMins]]
+    result = model.predict(input_data)
+    return "Customer is more likely to churn" if result[0] == 1 else "Customer will not churn"
 
-def flip_image(x):
-    return np.fliplr(x)
+# Gradio Inputs
+inputs = [
+    gr.inputs.Number(label="AccountWeeks"),
+    gr.inputs.Number(label="ContractRenewal"),
+    gr.inputs.Number(label="DataPlan"),
+    gr.inputs.Number(label="DataUsage"),
+    gr.inputs.Number(label="CustServCalls"),
+    gr.inputs.Number(label="DayMins"),
+    gr.inputs.Number(label="DayCalls"),
+    gr.inputs.Number(label="MonthlyCharge"),
+    gr.inputs.Number(label="OverageFee"),
+    gr.inputs.Number(label="RoamMins")
+]
 
+# Gradio Output
+output = gr.outputs.Label()  # Assuming the output is a label showing the churn prediction result
 
-with gr.Blocks() as demo:
-    gr.Markdown("Flip text or image files using this demo.")
-    with gr.Tab("Flip Text"):
-        text_input = gr.Textbox()
-        text_output = gr.Textbox()
-        text_button = gr.Button("Flip")
-    with gr.Tab("Flip Image"):
-        with gr.Row():
-            image_input = gr.Image()
-            image_output = gr.Image()
-        image_button = gr.Button("Flip")
+# Create the Gradio Interface
+interface = gr.Interface(fn=predict_churn, inputs=inputs, outputs=output)
 
-    with gr.Accordion("Open for More!"):
-        gr.Markdown("Look at me...")
+# Create a Gradio app with the interface
+app = gr.apps(interface)
 
-    text_button.click(flip_text, inputs=text_input, outputs=text_output)
-    image_button.click(flip_image, inputs=image_input, outputs=image_output)
-
-demo.launch(share=True)
+# If this script is run as the main module, start the Gradio app
+if __name__ == "__main__":
+    app.launch(share=True)

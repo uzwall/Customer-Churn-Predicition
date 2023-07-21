@@ -50,4 +50,5 @@ def infer(data:Customer):
 
 
 if __name__=="__main__":
+    import app
     uvicorn.run("app:app",host="localhost", port=8084, reload=True)
