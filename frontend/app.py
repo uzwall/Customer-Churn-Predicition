@@ -1,11 +1,6 @@
 import gradio as gr
 import joblib
-
-# Modify the model path to use forward slashes
-model_path = '../model/prediction2.joblib'
-
-# Load the model
-model = joblib.load(model_path)
+import requests
 
 # Function that takes the input_data and returns the result
 def predict_churn(AccountWeeks, ContractRenewal, DataPlan, DataUsage, CustServCalls,
@@ -13,7 +8,7 @@ def predict_churn(AccountWeeks, ContractRenewal, DataPlan, DataUsage, CustServCa
     # Assuming you have a function or model that predicts churn
     input_data = [[AccountWeeks, ContractRenewal, DataPlan, DataUsage, CustServCalls,
                    DayMins, DayCalls, MonthlyCharge, OverageFee, RoamMins]]
-    result = model.predict(input_data)
+    result = requests.posts("http://localhost:8084/infer", json=input_data)
     return "Customer is more likely to churn" if result[0] == 1 else "Customer will not churn"
 
 # Gradio Inputs
@@ -40,4 +35,4 @@ interface = gr.Interface(fn=predict_churn, inputs=inputs, outputs=output)
 
 # If this script is run as the main module, start the Gradio app
 if __name__ == "__main__":
-    interface.launch(share=True)
+    interface.launch(share=True,server_name=0.0.0.0,server_port=8084)

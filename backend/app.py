@@ -3,7 +3,7 @@ import uvicorn
 from pydantic import BaseModel
 import joblib
 
-app = FastAPI()
+backend.app = FastAPI()
 
 # Load the model
 model = joblib.load('model\prediction2.joblib')
@@ -22,14 +22,14 @@ class Customer(BaseModel):
     RoamMins: float
 
 
-@app.get("/home")
+@backend.app.get("/home")
 def home():
     print("hello")
     return {"message": "Hello World"}
 
 
 #function to print the churn prediction using trained model
-@app.post("/infer")
+@backend.app.post("/infer")
 def infer(data:Customer):
     
     # Convert the data to a 2D array
@@ -50,5 +50,5 @@ def infer(data:Customer):
 
 
 if __name__=="__main__":
-    import app
-    uvicorn.run("app:app",host="localhost", port=8084, reload=True)
+    import backend.app as app
+    uvicorn.run("app:app",host="0.0.0.0", port=8084, reload=True)
